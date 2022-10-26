@@ -8,16 +8,25 @@ public class HomePage {
     //we want to have fields, which represents WebEleemnts and methods
 
     private WebDriver driver;
-    private By formAuthenticationLink = By.linkText("Form Authentication");
 
     public HomePage(WebDriver driver) {
         this.driver = driver;
     }
 
     public LoginPage clickFormAuthentication() {
-        driver.findElement(formAuthenticationLink).click();
+        clickLink("Form Authentication");
         return new LoginPage(driver);
+    }
 
+    public DropdownPage clickDropDown(){
+        clickLink("Dropdown");
+        return new DropdownPage(driver);
+    }
+
+    //Because we have 45 elements on this page, it is not good to create webelement for each
+    // lets create general method
+    private void clickLink(String linkText) {
+        driver.findElement(By.linkText(linkText)).click();
     }
 
 }
